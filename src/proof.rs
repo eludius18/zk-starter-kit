@@ -7,14 +7,24 @@ use serde::{Deserialize, Serialize};
 use crate::field::FieldElement;
 use crate::r1cs::{Operation, R1CS};
 
+/// Represents a cryptographic proof.
 #[derive(Serialize, Deserialize)]
 pub struct Proof {
-    pub witness: Vec<BigInt>,  // The witness values used for proof generation
-    pub commitment: BigInt,     // Commitment to the witness, for verification
+    /// The witness values used for proof generation.
+    pub witness: Vec<BigInt>,
+    /// Commitment to the witness, for verification.
+    pub commitment: BigInt,
 }
 
 impl Proof {
-    // Generate a proof from R1CS and witness
+    /// Generates a proof from R1CS and witness.
+    ///
+    /// # Parameters
+    /// - `_r1cs`: The R1CS constraints.
+    /// - `witness`: A vector of `FieldElement` representing the witness.
+    ///
+    /// # Returns
+    /// - `Proof`: The generated proof.
     pub fn generate_proof(_r1cs: &R1CS, witness: &Vec<FieldElement>) -> Proof {
         // Create a commitment based on the witness
         let mut commitment_input = BigInt::zero();
@@ -32,7 +42,13 @@ impl Proof {
         }
     }
 
-    // Implement a method to save the proof to a binary file
+    /// Saves the proof to a binary file.
+    ///
+    /// # Parameters
+    /// - `filename`: The name of the file to save the proof to.
+    ///
+    /// # Returns
+    /// - `io::Result<()>`: The result of the file operation.
     pub fn save_to_binary(&self, filename: &str) -> io::Result<()> {
         let mut file = File::create(filename)?;
         let encoded: Vec<u8> = bincode::serialize(self).expect("Failed to serialize proof");
@@ -40,7 +56,14 @@ impl Proof {
         Ok(())
     }
 
-    // Verify a proof against the R1CS constraints
+    /// Verifies a proof against the R1CS constraints.
+    ///
+    /// # Parameters
+    /// - `proof`: The proof to verify.
+    /// - `r1cs`: The R1CS constraints.
+    ///
+    /// # Returns
+    /// - `bool`: `true` if the proof is valid, otherwise `false`.
     pub fn verify_proof(proof: &Proof, r1cs: &R1CS) -> bool {
         // Check if the commitment matches the expected hash
         let mut commitment_input = BigInt::zero();
@@ -87,6 +110,13 @@ impl Proof {
     }
 
     /// A simple hashing mechanism combining two BigInt values.
+    ///
+    /// # Parameters
+    /// - `left`: The left `BigInt` value.
+    /// - `right`: The right `BigInt` value.
+    ///
+    /// # Returns
+    /// - `BigInt`: The hash of the two values.
     fn hash(left: &BigInt, right: &BigInt) -> BigInt {
         // For simplicity, we will just combine the two values
         // and take the modulo of a large prime number.

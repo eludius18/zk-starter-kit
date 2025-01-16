@@ -1,12 +1,22 @@
 use num_bigint::BigInt;
 use crate::field::FieldElement;
 
+/// Represents a Merkle Tree with a root and leaves.
 pub struct MerkleTree {
+    /// The root of the Merkle Tree.
     pub root: BigInt,
+    /// The leaves of the Merkle Tree.
     pub leaves: Vec<BigInt>,
 }
 
 impl MerkleTree {
+    /// Creates a new Merkle Tree from a list of leaves.
+    ///
+    /// # Parameters
+    /// - `leaves`: A vector of `BigInt` representing the leaves.
+    ///
+    /// # Returns
+    /// - `Self`: A new instance of the `MerkleTree` struct.
     pub fn new(leaves: Vec<BigInt>) -> Self {
         let root = MerkleTree::compute_root(&leaves);
         MerkleTree {
@@ -15,6 +25,13 @@ impl MerkleTree {
         }
     }
 
+    /// Computes the Merkle path for a given leaf index.
+    ///
+    /// # Parameters
+    /// - `index`: The index of the leaf.
+    ///
+    /// # Returns
+    /// - `Vec<(BigInt, bool)>`: The Merkle path as a vector of tuples containing the sibling hash and a boolean indicating if the current node is a left sibling.
     pub fn merkle_path(&self, index: usize) -> Vec<(BigInt, bool)> {
         let mut path = Vec::new();
         let mut current_index = index;
@@ -49,6 +66,13 @@ impl MerkleTree {
         path
     }
 
+    /// Computes the root of the Merkle Tree from the leaves.
+    ///
+    /// # Parameters
+    /// - `leaves`: A reference to a vector of `BigInt` representing the leaves.
+    ///
+    /// # Returns
+    /// - `BigInt`: The root of the Merkle Tree.
     fn compute_root(leaves: &Vec<BigInt>) -> BigInt {
         let mut nodes = leaves.clone();
         while nodes.len() > 1 {
@@ -64,6 +88,13 @@ impl MerkleTree {
     }
 
     /// A simple hashing mechanism combining two BigInt values.
+    ///
+    /// # Parameters
+    /// - `left`: The left `BigInt` value.
+    /// - `right`: The right `BigInt` value.
+    ///
+    /// # Returns
+    /// - `BigInt`: The hash of the two values.
     pub fn hash(left: &BigInt, right: &BigInt) -> BigInt {
         // For simplicity, we will just combine the two values
         // and take the modulo of a large prime number.
@@ -71,7 +102,14 @@ impl MerkleTree {
         combined % BigInt::from(1_000_000_007) // A large prime for modulo
     }
 
-    /// Hash two FieldElements to create a new FieldElement
+    /// Hash two FieldElements to create a new FieldElement.
+    ///
+    /// # Parameters
+    /// - `a`: The first `FieldElement`.
+    /// - `b`: The second `FieldElement`.
+    ///
+    /// # Returns
+    /// - `FieldElement`: The result of the hash.
     pub fn apply_hash(&self, a: &FieldElement, b: &FieldElement) -> FieldElement {
         // Example hash function: (a + b) % modulus
         assert_eq!(a.get_modulus(), b.get_modulus(), "Moduli must match for hashing");

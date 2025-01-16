@@ -5,7 +5,7 @@ mod qap;
 mod field;
 mod proof;
 
-use num_bigint::{ToBigInt};
+use num_bigint::ToBigInt;
 use circuit::Circuit;
 use crate::field::FieldElement;
 
