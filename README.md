@@ -2,8 +2,6 @@
 
 This repository serves as a starting point for developing applications using zero-knowledge (ZK) technology in Rust. It provides a minimal framework to help you get up to speed with the basics of ZK proofs and how they can be integrated into Rust-based projects.
 
----
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -16,8 +14,6 @@ This repository serves as a starting point for developing applications using zer
 - [Contributing](#contributing)
 - [License](#license)
 
----
-
 ## Introduction
 
 Zero-knowledge proofs are a powerful cryptographic concept that allows one party to prove the validity of information to another without revealing the information itself. This starter kit is designed to:
@@ -26,16 +22,12 @@ Zero-knowledge proofs are a powerful cryptographic concept that allows one party
 - Provide a clean and modular Rust-based project setup for experimenting with ZK.
 - Include examples and utilities for ZK proof generation and verification.
 
----
-
 ## Features
 
 - Minimal Rust setup with a focus on zero-knowledge proof libraries.
 - Example workflows for proof generation and verification.
 - Configurable and extendable project structure.
 - Performance-optimized builds using `cargo` commands.
-
----
 
 ## Requirements
 
@@ -44,8 +36,6 @@ Before starting, ensure you have the following installed on your system:
 - **Rust** (latest stable version): [Install Rust](https://www.rust-lang.org/tools/install)
 - **Cargo** (comes with Rust installation)
 - A supported operating system (Linux, macOS, or Windows)
-
----
 
 ## Installation
 
@@ -57,8 +47,6 @@ Before starting, ensure you have the following installed on your system:
    ```
 
 2. Install the required dependencies (if any). Dependencies are managed via the `Cargo.toml` file.
-
----
 
 ## Usage
 
@@ -82,8 +70,6 @@ cargo run --release
 
 This will run the main application logic defined in the `src/main.rs` file.
 
----
-
 ## Project Structure
 
 ```
@@ -103,8 +89,6 @@ zk-starter-kit/
 ├── zk-starter-kit.d
 
 ```
-
----
 
 ## Commands
 
@@ -140,8 +124,6 @@ Here are some essential commands for working with the project:
   cargo fmt
   ```
 
----
-
 ## Contributing
 
 Contributions are welcome! If you want to improve this project, please:
@@ -151,8 +133,6 @@ Contributions are welcome! If you want to improve this project, please:
 3. Commit your changes (`git commit -m "Add feature"`).
 4. Push to the branch (`git push origin feature-name`).
 5. Open a pull request.
-
----
 
 ## License
 
